@@ -4,10 +4,10 @@ public class main {
     
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> {
-            // Create window
+            // create window
             window = new ui.Window("Re-cursed");
             new Intro(window);
-            // Make window visible
+            // make window visible
             window.setVisible(true);
         });
     }

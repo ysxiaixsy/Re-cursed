@@ -13,13 +13,17 @@ public class GameLoop {
         show();
     }
     
+    // displays the game loop screen with background and interactive white square
     private void show() {
+        // clear previous components from window
         window.getFrame().getContentPane().removeAll();
         window.getFrame().repaint();
         
+        // create layered pane to stack panels on top of each other
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(1600, 900));
         
+        // load and display background image
         BufferedImage bgImage = loadImage("assets/backgrounds/dungeon unlit.png");
         JPanel backgroundPanel = new JPanel() {
             @Override
@@ -34,6 +38,7 @@ public class GameLoop {
         backgroundPanel.setLayout(null);
         layeredPane.add(backgroundPanel, Integer.valueOf(0));
         
+        // track clicks on white square
         int[] clickCount = {0};
         final JPanel whiteSquarePanel = new JPanel() {
             @Override
@@ -47,13 +52,16 @@ public class GameLoop {
         whiteSquarePanel.setLayout(null);
         whiteSquarePanel.setOpaque(false);
         
+        // handle clicks on white square
         whiteSquarePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 clickCount[0]++;
+                // when white square is clicked 10 times, remove it and show next button
                 if (clickCount[0] >= 10) {
                     layeredPane.remove(whiteSquarePanel);
                     
+                    // create next button to restart game loop
                     ui.Button nextButton = new ui.Button("next", 700, 400, 100, 50);
                     nextButton.addActionListener(event -> new GameLoop(window));
                     layeredPane.add(nextButton, Integer.valueOf(1));
@@ -68,6 +76,7 @@ public class GameLoop {
         window.getFrame().revalidate();
     }
     
+    // load image from file path
     private BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(new File(path));

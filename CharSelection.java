@@ -13,12 +13,16 @@ public class CharSelection {
         show();
     }
     
+    // display character selection screen where player picks left or right
     private void show() {
+        // clear previous components from window
         window.getFrame().getContentPane().removeAll();
         window.getFrame().repaint();
         
+        // load background image
         BufferedImage bgImage = loadImage("assets/backgrounds/title bg.png");
         
+        // create panel with background image
         JPanel selectionPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -31,15 +35,18 @@ public class CharSelection {
         selectionPanel.setPreferredSize(new Dimension(1600, 900));
         selectionPanel.setLayout(null);
         
+        // handle left and right side clicks
         selectionPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 int x = e.getX();
+                // left side is x less than 800
                 if (x < 800) {
                     System.out.println("left");
                 } else {
                     System.out.println("right");
                 }
+                // transition to game loop screen
                 new GameLoop(window);
             }
         });
@@ -48,6 +55,7 @@ public class CharSelection {
         window.getFrame().revalidate();
     }
     
+    // load image from file path
     private BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(new File(path));
