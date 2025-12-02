@@ -1,0 +1,113 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class ui {
+    
+    public static class Panel extends JPanel {
+        private int width;
+        private int height;
+        
+        public Panel(int width, int height) {
+            this.width = width;
+            this.height = height;
+            setPreferredSize(new Dimension(width, height));
+            setLayout(null);
+        }
+        
+        public void addComponent(JComponent component) {
+            add(component);
+        }
+        
+        public int getPanelWidth() {
+            return width;
+        }
+        
+        public int getPanelHeight() {
+            return height;
+        }
+    }
+    
+    public static class Window {
+        private static final int WINDOW_WIDTH = 1600;
+        private static final int WINDOW_HEIGHT = 900;
+        
+        private JFrame frame;
+        
+        public Window(String title) {
+            initializeWindow(title);
+        }
+        
+        private void initializeWindow(String title) {
+            frame = new JFrame(title);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+            frame.setResizable(false);
+            frame.setLocationRelativeTo(null);
+        }
+        
+        public void setVisible(boolean visible) {
+            frame.setVisible(visible);
+        }
+        
+        public JFrame getFrame() {
+            return frame;
+        }
+        
+        public void addComponent(JComponent component) {
+            frame.add(component);
+        }
+    }
+    
+    public static class Button extends JButton {
+        private String buttonText;
+        private int x;
+        private int y;
+        private int width;
+        private int height;
+        
+        public Button(String text, int x, int y, int width, int height) {
+            super(text);
+            this.buttonText = text;
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            
+            setBounds(x, y, width, height);
+            setLayout(null);
+        }
+        
+        public void setText(String text) {
+            this.buttonText = text;
+            super.setText(text);
+        }
+        
+        public void setPosition(int x, int y) {
+            this.x = x;
+            this.y = y;
+            setBounds(x, y, width, height);
+        }
+        
+        public void setSize(int width, int height) {
+            this.width = width;
+            this.height = height;
+            setBounds(x, y, width, height);
+        }
+        
+        public int getX() {
+            return x;
+        }
+        
+        public int getY() {
+            return y;
+        }
+        
+        public int getWidth() {
+            return width;
+        }
+        
+        public int getHeight() {
+            return height;
+        }
+    }
+}
