@@ -36,7 +36,7 @@ public class CharSelection {
         selectionPanel.setLayout(null);
         
         // handle left and right side clicks
-        selectionPanel.addMouseListener(new MouseAdapter() {
+        MouseAdapter selectionListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 int x = e.getX();
@@ -49,7 +49,8 @@ public class CharSelection {
                 // transition to game loop screen
                 new GameLoop(window);
             }
-        });
+        };
+        selectionPanel.addMouseListener(selectionListener);
         
         window.addComponent(selectionPanel);
         window.getFrame().revalidate();

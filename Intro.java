@@ -37,12 +37,13 @@ public class Intro {
         imagePanel.setLayout(null);
         
         // clicking anywhere transitions to character selection
-        imagePanel.addMouseListener(new MouseAdapter() {
+        MouseAdapter introListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 new CharSelection(window);
             }
-        });
+        };
+        imagePanel.addMouseListener(introListener);
         
         window.addComponent(imagePanel);
     }

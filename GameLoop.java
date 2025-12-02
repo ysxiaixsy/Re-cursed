@@ -53,7 +53,7 @@ public class GameLoop {
         whiteSquarePanel.setOpaque(false);
         
         // handle clicks on white square
-        whiteSquarePanel.addMouseListener(new MouseAdapter() {
+        MouseAdapter whiteSquareListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 clickCount[0]++;
@@ -68,7 +68,8 @@ public class GameLoop {
                     layeredPane.repaint();
                 }
             }
-        });
+        };
+        whiteSquarePanel.addMouseListener(whiteSquareListener);
         
         layeredPane.add(whiteSquarePanel, Integer.valueOf(1));
         
@@ -81,7 +82,7 @@ public class GameLoop {
         try {
             return ImageIO.read(new File(path));
         } catch (Exception e) {
-            System.err.println("Error loading image: " + path);
+            System.err.println("Error loading image, " + path);
             return null;
         }
     }
