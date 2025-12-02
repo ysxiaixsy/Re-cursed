@@ -1,7 +1,5 @@
 # Re: cursed
-Simple turn-based RPG
-
-To play: compile all .java files in this folder (if not compiled yet) and then run main
+Simple turn-based RPG.
 
 Description:
 
@@ -17,6 +15,8 @@ The dungeon remembers.
 
 
 # IMPORTANT
+
+To play: compile all .java files in this folder (if not compiled yet) and then run main
 
 no image buffer so manually edit BGs to be 1600x900 otherwise they wont fit in the window, worry implementing it later
 
