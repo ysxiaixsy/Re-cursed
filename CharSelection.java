@@ -1,8 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class CharSelection {
@@ -19,17 +16,13 @@ public class CharSelection {
         window.getFrame().getContentPane().removeAll();
         window.getFrame().repaint();
         
-        // load background image
-        BufferedImage bgImage = loadImage("assets/backgrounds/title bg.png");
-        
         // create panel with background image
         JPanel selectionPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                if (bgImage != null) {
-                    g.drawImage(bgImage, 0, 0, 1600, 900, null);
-                }
+                ImageIcon bgImage = new ImageIcon("assets/backgrounds/title bg.png");
+                bgImage.paintIcon(this, g, 0, 0);
             }
         };
         selectionPanel.setPreferredSize(new Dimension(1600, 900));
@@ -40,13 +33,7 @@ public class CharSelection {
             @Override
             public void mousePressed(MouseEvent e) {
                 int x = e.getX();
-                // left side is x less than 800
-                if (x < 800) {
-                    System.out.println("left");
-                } else {
-                    System.out.println("right");
-                }
-                // transition to game loop screen
+                System.out.println(x < 800 ? "left" : "right");
                 new GameLoop(window);
             }
         };
@@ -54,15 +41,5 @@ public class CharSelection {
         
         window.addComponent(selectionPanel);
         window.getFrame().revalidate();
-    }
-    
-    // load image from file path
-    private BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(new File(path));
-        } catch (Exception e) {
-            System.err.println("Error loading image: " + path);
-            return null;
-        }
     }
 }

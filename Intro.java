@@ -1,8 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Intro {
@@ -15,22 +12,17 @@ public class Intro {
     
     // display intro screen with layered background and ui images
     private void show() {
-        // load background and ui images
-        BufferedImage bgImage = loadImage("assets/backgrounds/title bg.png");
-        BufferedImage uiImage = loadImage("assets/ui/title.png");
-        
         // create panel with two layered images
         JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // draw background first, then ui on top
-                if (bgImage != null) {
-                    g.drawImage(bgImage, 0, 0, 1600, 900, null);
-                }
-                if (uiImage != null) {
-                    g.drawImage(uiImage, 0, 0, 1600, 900, null);
-                }
+                ImageIcon bgImage = new ImageIcon("assets/backgrounds/title bg.png");
+                ImageIcon uiImage = new ImageIcon("assets/ui/title.png");
+                
+                bgImage.paintIcon(this, g, 0, 0);
+                uiImage.paintIcon(this, g, 0, 0);
             }
         };
         imagePanel.setPreferredSize(new Dimension(1600, 900));
@@ -46,15 +38,5 @@ public class Intro {
         imagePanel.addMouseListener(introListener);
         
         window.addComponent(imagePanel);
-    }
-    
-    // load image from file path
-    private BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(new File(path));
-        } catch (Exception e) {
-            System.err.println("Error loading image: " + path);
-            return null;
-        }
     }
 }

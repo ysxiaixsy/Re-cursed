@@ -1,8 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GameLoop {
@@ -24,14 +21,12 @@ public class GameLoop {
         layeredPane.setPreferredSize(new Dimension(1600, 900));
         
         // load and display background image
-        BufferedImage bgImage = loadImage("assets/backgrounds/dungeon unlit.png");
         JPanel backgroundPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                if (bgImage != null) {
-                    g.drawImage(bgImage, 0, 0, 1600, 900, null);
-                }
+                ImageIcon bgImage = new ImageIcon("assets/backgrounds/dungeon unlit.png");
+                bgImage.paintIcon(this, g, 0, 0);
             }
         };
         backgroundPanel.setBounds(0, 0, 1600, 900);
@@ -75,15 +70,5 @@ public class GameLoop {
         
         window.addComponent(layeredPane);
         window.getFrame().revalidate();
-    }
-    
-    // load image from file path
-    private BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(new File(path));
-        } catch (Exception e) {
-            System.err.println("Error loading image, " + path);
-            return null;
-        }
     }
 }

@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class ui {
@@ -33,16 +35,22 @@ public class ui {
         
         private JFrame frame;
         
-        public Window(String title) {
-            initializeWindow(title);
+        public Window(String title, String iconPath) {
+            initializeWindow(title, iconPath);
         }
         
-        private void initializeWindow(String title) {
+        private void initializeWindow(String title, String iconPath) {
             frame = new JFrame(title);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-            frame.setResizable(false);
             frame.setLocationRelativeTo(null);
+            frame.setResizable(false);
+            
+            try {
+                frame.setIconImage(ImageIO.read(new File(iconPath)));
+            } catch (Exception e) {
+                System.err.println("Error loading window icon, " + e.getMessage());
+            }
         }
         
         public void setVisible(boolean visible) {
@@ -59,7 +67,6 @@ public class ui {
     }
     
     public static class Button extends JButton {
-        private String buttonText;
         private int x;
         private int y;
         private int width;
@@ -67,7 +74,6 @@ public class ui {
         
         public Button(String text, int x, int y, int width, int height) {
             super(text);
-            this.buttonText = text;
             this.x = x;
             this.y = y;
             this.width = width;
@@ -75,11 +81,6 @@ public class ui {
             
             setBounds(x, y, width, height);
             setLayout(null);
-        }
-        
-        public void setText(String text) {
-            this.buttonText = text;
-            super.setText(text);
         }
         
         public void setPosition(int x, int y) {
