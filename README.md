@@ -13,3 +13,13 @@ They say something waits at the deepest point—a final weight meant to break th
 
 Down here, nothing ends cleanly.
 The dungeon remembers.
+
+
+
+# IMPORTANT
+
+no image buffer so manually edit BGs to be 1600x900 otherwise they wont fit in the window, worry implementing it later
+
+we will not be using buttons, only panels with an image of what looks like a custom button
+
+when implementing these panel buttons, as much as possible include print statements that confirm what was actually pressed

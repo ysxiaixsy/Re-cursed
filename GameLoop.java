@@ -58,7 +58,13 @@ public class GameLoop {
                     
                     // create next button to restart game loop
                     ui.Button nextButton = new ui.Button("next", 700, 400, 100, 50);
-                    nextButton.addActionListener(event -> new GameLoop(window));
+                    AbstractAction nextButtonAction = new AbstractAction() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            new GameLoop(window);
+                        }
+                    };
+                    nextButton.addActionListener(nextButtonAction);
                     layeredPane.add(nextButton, Integer.valueOf(1));
                     layeredPane.repaint();
                 }
